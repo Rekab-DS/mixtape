@@ -3,7 +3,7 @@ time_key <- function(df = ds,
                      x,
                      start = '2019-01-01',
                      end = Sys.Date(),
-                     end_of_week = 'Tuesday', #new weekly meeting formate
+                     end_of_week = Sys.getenv('END_OF_WEEK', 'Tuesday'), #configurable via ENV var, defaults to Tuesday
                      week_days = 7,
                      weekend_days = c('Friday', 'Saturday'),
                      group_year = F) {
