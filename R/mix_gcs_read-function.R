@@ -15,7 +15,7 @@ mix_gcs_read <- function(project,
                          skip_lines = 0) {
 
   # Check for bucket override via environment variable
-  bucket_override <- Sys.getenv('MIXTAPE_SOURCE_BUCKET_OVERRIDE', default = "")
+  bucket_override <- Sys.getenv('MIXTAPE_SOURCE_BUCKET_OVERRIDE', "")
   if (bucket_override != "") {
     bucket <- bucket_override
     message(paste("Source bucket overridden to:", bucket))
