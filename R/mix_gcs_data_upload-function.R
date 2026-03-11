@@ -9,6 +9,13 @@ mix_gcs_data_upload <- function(project,
                                 # destination_file_name,
                                 object_format = 'parquet') {
 
+  # Check for bucket override via environment variable
+  bucket_override <- Sys.getenv('MIXTAPE_TARGET_BUCKET_OVERRIDE', default = "")
+  if (bucket_override != "") {
+    bucket <- bucket_override
+    message(paste("Target bucket overridden to:", bucket))
+  }
+
   #-- Start time
   v_start_time <- Sys.time()
 
