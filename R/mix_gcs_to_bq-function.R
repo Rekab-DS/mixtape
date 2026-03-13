@@ -23,6 +23,13 @@ mix_gcs_to_bq <- function(project,
   library(dplyr)
   library(purrr)
 
+  #-- Target bucket override
+  target_bucket_override <- Sys.getenv('MIXTAPE_TARGET_BUCKET_OVERRIDE', '')
+  if (target_bucket_override != '') {
+    bucket <- target_bucket_override
+    message(paste("Using target bucket override for GCS-to-BigQuery:", bucket))
+  }
+
   #-- Variables
   v_staging <- max(if_else(!is.null(cluster_index) | !is.null(partition_index), 1, 0), use_staging)
   v_bq_table <- paste0(dataset, '.', table)

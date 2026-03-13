@@ -17,6 +17,13 @@ mix_bq_to_gcs <- function(project,
   library(bigrquery)
   library(dplyr)
 
+  #-- Target bucket override
+  target_bucket_override <- Sys.getenv('MIXTAPE_TARGET_BUCKET_OVERRIDE', '')
+  if (target_bucket_override != '') {
+    bucket <- target_bucket_override
+    message(paste("Using target bucket override for BigQuery export:", bucket))
+  }
+
   #-- Set vars
   folder <- if_else(is.null(folder), '', paste0(folder, '/'))
   v_uri <- paste0(bucket, '/', folder, table, '*.', object_format)
